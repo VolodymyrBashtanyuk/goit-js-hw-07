@@ -1,17 +1,13 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-// console.log(galleryItems);
 
-const createGalleryListItem = document.querySelector('.gallery');
+const galleryItemList = document.querySelector('.gallery');
 
-const galleryList = createGalleryList(galleryItems);
-console.log(galleryList);
+const galleryListFunction = createGalleryList(galleryItems);
+galleryItemList.insertAdjacentHTML('beforeend', galleryListFunction);
 
-createGalleryListItem.insertAdjacentHTML('beforeend', galleryList);
-
-
-
+galleryItemList.addEventListener('click', onGalleryModalOpenClose);
 
 function createGalleryList(itemList) {
     return itemList.map(({ preview, original, description }) => {
@@ -23,9 +19,33 @@ function createGalleryList(itemList) {
       data-source="${original}"
       alt="${description}"
     />
-  </a>`;
+    </a>`;
     }).join(' ');
-    // return images;
 };
- 
+
+function onGalleryModalOpenClose(event) {
+    event.preventDefault();
+    const isImagesClickEl = event.target.classList.contains('gallery__image');
+    if (!isImagesClickEl) {
+        return;
+    };
+    const instance = basicLightbox.create(`
+    <div class="modal">
+    <img src='${event.target.dataset.source}'
+    />
+    </div>`
+      
+    );
+    instance.show();
+    
+    addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            instance.close();
+        };
+    });
+    const closeByClick = document.querySelector('.modal');
+    closeByClick.addEventListener('click', () => instance.close())
+    
+};
+
 
