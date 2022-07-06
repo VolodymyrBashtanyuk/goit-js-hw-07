@@ -30,10 +30,8 @@ function onGalleryModalOpenClose(event) {
         return;
     };
     const instance = basicLightbox.create(`
-    <div class="modal">
     <img src='${event.target.dataset.source}'
-    />
-    </div>` 
+    />` 
     );
 
     instance.show();
@@ -46,14 +44,7 @@ function onGalleryModalOpenClose(event) {
          };
       };
     
-    document.addEventListener('keydown', CloseByEscape);
-
-// без цього коду у мене не працює закриття модалки, коли клікаю мишкою по катртинкі.(можливо це тільки в мене)
-    
-    // const closeByClick = document.querySelector('.modal');
-    // closeByClick.addEventListener('click', () => instance.close())
-    
-    
+    document.addEventListener('keydown', CloseByEscape);    
 };
 
  

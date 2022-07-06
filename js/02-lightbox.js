@@ -19,5 +19,5 @@ function createGalleryList(itemList) {
     }).join(' ');
 };
 
-new SimpleLightbox( '.gallery a', {captionsData: 'alt' , captionDelay: 250 });
+new SimpleLightbox( '.gallery a', {captionSelector: 'img', captionsData: 'alt', captionPosition: 'bottom', captionDelay: 250 });
 
