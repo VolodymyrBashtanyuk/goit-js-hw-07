@@ -33,19 +33,27 @@ function onGalleryModalOpenClose(event) {
     <div class="modal">
     <img src='${event.target.dataset.source}'
     />
-    </div>`
-      
+    </div>` 
     );
+
     instance.show();
     
-    addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
+
+    const CloseByEscape = function  (event) {
+        if (event.code === 'Escape') {
             instance.close();
-        };
-    });
-    const closeByClick = document.querySelector('.modal');
-    closeByClick.addEventListener('click', () => instance.close())
+            document.removeEventListener('keydown', CloseByEscape);
+         };
+      };
+    
+    document.addEventListener('keydown', CloseByEscape);
+
+// без цього коду у мене не працює закриття модалки, коли клікаю мишкою по катртинкі.(можливо це тільки в мене)
+    
+    // const closeByClick = document.querySelector('.modal');
+    // closeByClick.addEventListener('click', () => instance.close())
+    
     
 };
 
-
+ 
